@@ -18,4 +18,4 @@ def runGA(populationSize, crossoverRate, mutationRate):
         popl = newPop
         popl.displays()
 
-runGA(10, 1.0, 0.05)
+runGA(6, 0.7, 0.02)
