@@ -47,15 +47,10 @@ class population:
     
     def displays(self):
         for i in range(int(len(self.pop))):
-#            plt.figure()
             currentPal = self.pop[i].palDisplay()
-            #print(currentPal)
             sns.set_palette(currentPal)
             current_palette = sns.color_palette()
             sns.palplot(current_palette)
             plt.savefig('palettes/palette'+str(i)+'.png', dpi=300, bbox_inches='tight')
             plt.close()
         plt.close()
-#            plt.show()
-#            if i != None: i.display()
-            #print("\n")

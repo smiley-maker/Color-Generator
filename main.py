@@ -5,7 +5,7 @@ import copy
 
 def runGA(populationSize, crossoverRate, mutationRate):
     popl = population(populationSize)
-    for j in range(5):
+    for j in range(400):
         newPop = []
         for i in range(int(populationSize/2)):
             popl.sortByFitness()
@@ -21,8 +21,9 @@ def runGA(populationSize, crossoverRate, mutationRate):
             newPop.append(pair1.copy())
             newPop.append(pair2.copy())
         popl.pop = newPop
-        popl.displays()
         if j%100 == 0:
             print(j)
+        
+    popl.displays()
 
-runGA(80, 1, 0)
+runGA(60, 0.8, 0.2)

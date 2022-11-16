@@ -2,7 +2,9 @@ import random
 import numpy as np
 import copy
 
+#Color class to define an R, G, B color
 class color:
+    #Constructor that either accepts specific red, green, and blue values or randomly generates them
     def __init__(self, red=None, green=None, blue=None):
         if red != None:
             self.red = red
@@ -18,7 +20,8 @@ class color:
             self.blue = random.randint(0, 255)
     
     def randomize(self):
-        rate = 30
+        #Function to change each R, G, B value in a given color
+        rate = 100 #Change in mutation
         mod = random.randint(-rate, rate)
         while not 0 <= self.red + mod <= 255:
             mod = random.randint(-rate, rate)
@@ -31,22 +34,21 @@ class color:
         while not 0 <= self.blue + mod <= 255:
             mod = random.randint(-rate, rate)
         self.blue += mod
-
-
-#        print(random.sample([random.randint(0, 10), -1*(random.randint(0, 10)%abs(1-self.red))], 1))
-#        self.red += random.sample([random.randint(0, 10)%abs(256-self.red), -1*(random.randint(0, 10)%abs(self.red+1))], 1)[0]
- #       self.green += random.sample([random.randint(0, 10)%abs(256-self.green), -1*(random.randint(0, 10)%abs(1+self.green))], 1)[0]
-  #      self.blue += random.sample([random.randint(0, 10)%abs(256-self.blue), -1*(random.randint(0, 10)%abs(1+self.blue))], 1)[0]
     
     def display(self):
+        #Simply prints the R, G, and B values in a color
         print("(%f, %f, %f)" % (self.red, self.green, self.blue))
     
     def luminance(self):
+        #Function to calculate the luminance of a color
+        #Formats the values
         R = self.red/255
         G = self.green/255
         B = self.blue/255
+        #Calculates luminance based on a specific formula
         lum = 0.2126*R + 0.7152*G + 0.0722*B
         return lum
     
     def copy(self):
+        #Copies a color
         return copy.copy(self)
