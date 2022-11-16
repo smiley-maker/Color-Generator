@@ -4,6 +4,7 @@ import numpy as np
 from matplotlib.colors import ListedColormap
 import seaborn as sns
 from matplotlib import pyplot as plt
+import copy
 
 class population:
     def __init__(self, popSize):
@@ -31,18 +32,24 @@ class population:
         return (choiceOne, choiceTwo)
     
     def crossover(self, pal1, pal2):
-        crossoverPoint = 1
+        crossoverPoint = random.randint(1,len(pal1.pal)-1)
         newpal1 = pal1.pal[0:crossoverPoint] + pal2.pal[crossoverPoint:]
         newpal2 = pal2.pal[0:crossoverPoint] + pal1.pal[crossoverPoint:]
-        return newpal1, newpal2
+        return newpal1.copy(), newpal2.copy()
 
     def addPalette(self, pal):
         self.pop.append(pal)
     
+    def copy(self):
+        newPop = population()
+        for i in self.pop:
+            newPop.pop.append(i.copy())
+    
     def displays(self):
-        for i in range(int(len(self.pop)/2)):
+        for i in range(int(len(self.pop))):
 #            plt.figure()
             currentPal = self.pop[i].palDisplay()
+            #print(currentPal)
             sns.set_palette(currentPal)
             current_palette = sns.color_palette()
             sns.palplot(current_palette)

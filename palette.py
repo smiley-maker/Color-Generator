@@ -3,12 +3,11 @@ import random
 from matplotlib.colors import ListedColormap 
 import seaborn as sns
 from matplotlib import pyplot as plt
-        
 
 class palette():
     def __init__(self):
         self.pal = []
-        for i in range(5):
+        for i in range(8):
             self.pal.append(color())
 #        c = color()
  #       self.pal.append(c)
@@ -25,6 +24,8 @@ class palette():
             randNum = random.random()
             if randNum < mutationRate:
                 col.randomize()
+            newPalette.append(col)
+        return newPalette
 
     def contrast(self):
         contrastList = []
@@ -38,7 +39,12 @@ class palette():
             contrastList.append(cr)
         return contrastList
 
-
+    def copy(self):
+        p = palette()
+        p.pal = []
+        for i in self.pal:
+            p.pal.append(i.copy())
+        return p
 
         # lum1 = color.luminance(self.pal[0])
         # lum2 = color.luminance(self.pal[1])
@@ -56,10 +62,10 @@ class palette():
                 fitness -= 15
             elif cl[c] > 5:
                 fitness += 30
-            if abs(self.pal[c].red - self.pal[c+1].red) == 10:
-                fitness += 20
-            elif abs(self.pal[c].red - self.pal[c+1].red) != 10:
-                fitness -= 30
+       #     if abs(self.pal[c].red - self.pal[c+1].red) == 10:
+        #        fitness += 20
+         #   elif abs(self.pal[c].red - self.pal[c+1].red) != 10:
+          #      fitness -= 30
 #        print(fitness)
         return fitness
         # fitness = 0
@@ -75,6 +81,7 @@ class palette():
         colorPal = []
         indColor = ()
         for col in self.pal:
+            #print(col.green)
             indColor = (col.red/255, col.green/255, col.blue/255)
             colorPal.append(indColor)
         #print(colorPal)
